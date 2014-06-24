@@ -2,9 +2,7 @@
 
 import os
 from dawdaw.states import pkg, postgres_user, postgres_database, service, cmd, user, file, git, virtualenv_mod
-from dawdaw.utils import debug, default, test
-
-debug()
+from dawdaw.utils import default, test
 
 cmd.run("update-locale LC_ALL=en_US.UTF-8 && export LC_ALL=en_US.UTF-8")  # ensure that we create the db with the correct encoding
 
