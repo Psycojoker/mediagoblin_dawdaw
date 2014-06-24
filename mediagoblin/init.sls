@@ -36,6 +36,8 @@ with default(user="mediagoblin", group="mediagoblin", runas="mediagoblin"):
 
     pip.installed("flup", pip_bin=os.path.join(mediagoblin_git_dir, "bin/pip"), runas=None)
 
+    file.directory("/srv/mediagoblin.example.org/mediagoblin/user_dev", dir_mod="755")
+
 pkg.installed("nginx")
 service.running("nginx")
 mediagoblin_nginx_config = file.managed("/etc/nginx/sites-enabled/mediagoblin.conf", source="salt://mediagoblin/nginx.conf")
