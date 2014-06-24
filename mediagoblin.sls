@@ -7,3 +7,4 @@ pkg.installed("dependancies", pkgs=["git-core", "python", "python-dev", "python-
 service.running("postgresql")
 
 postgres_user.present("mediagoblin")
+postgres_user.present("root")  # for debugging
