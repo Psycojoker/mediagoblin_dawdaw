@@ -17,6 +17,8 @@ postgres_database.present("mediagoblin")
 
 user.present("mediagoblin")
 
+cmd.run("chown -R mediagoblin:mediagoblin /tmp/.pip-download-cache-root/")
+
 with default(user="mediagoblin", group="mediagoblin", runas="mediagoblin"):
     mediagoblin_dir = "/srv/mediagoblin.example.org"
     mediagoblin_git_dir = os.path.join(mediagoblin_dir, "mediagoblin")
