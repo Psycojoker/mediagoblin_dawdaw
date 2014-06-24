@@ -28,5 +28,5 @@ with default(user="mediagoblin", group="mediagoblin", runas="mediagoblin"):
         cmd.run("git submodule init && git submodule update", cwd=mediagoblin_git_dir)
 
     if not test("ls %s" % os.path.join(mediagoblin_git_dir, "bin")):
-        virtualenv_mod.managed(mediagoblin_git_dir)
+        virtualenv_mod.managed(mediagoblin_git_dir, system_site_packages=True)
         cmd.run("./bin/python setup.py develop", cwd=mediagoblin_git_dir)
