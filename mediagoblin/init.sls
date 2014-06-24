@@ -30,3 +30,6 @@ with default(user="mediagoblin", group="mediagoblin", runas="mediagoblin"):
     if not test("ls %s" % os.path.join(mediagoblin_git_dir, "bin")):
         virtualenv_mod.managed(mediagoblin_git_dir, system_site_packages=True)
         cmd.run("./bin/python setup.py develop", cwd=mediagoblin_git_dir)
+
+    mediagoblin_local_ini = file.managed(os.path.join(mediagoblin_git_dir, "mediagoblin_local.ini"), source="salt://mediagoblin/mediagoblin_local.ini")
+    cmd.wait("./bin/gmg dbupdate", cwd=mediagoblin_git_dir, watch=[mediagoblin_local_ini])
