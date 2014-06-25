@@ -49,7 +49,7 @@ with default(user="mediagoblin", group="mediagoblin", runas="mediagoblin"):
         cmd.run("./bin/python setup.py develop", cwd=mediagoblin_git_dir)
 
     mediagoblin_local_ini = file.managed(os.path.join(mediagoblin_git_dir, "mediagoblin_local.ini"), source="salt://mediagoblin/mediagoblin_local.ini")
-    cmd.wait("./bin/gmg dbupdate", cwd=mediagoblin_git_dir, watch=[mediagoblin_local_ini])
+    dbupdate = cmd.wait("./bin/gmg dbupdate", cwd=mediagoblin_git_dir, watch=[mediagoblin_local_ini])
 
     pip.installed("flup", pip_bin=os.path.join(mediagoblin_git_dir, "bin/pip"), runas=None)
 
@@ -64,3 +64,4 @@ pkg.installed("supervisor")
 service.running("supervisor")
 mediagoblin_supervisor_conf = file.managed("/etc/supervisor/conf.d/mediagoblin.conf", source="salt://mediagoblin/supervisor.conf")
 cmd.wait("supervisorctl update", watch=[mediagoblin_supervisor_conf])
+cmd.wait("supervisorctl restart mediagoblin", watch=[dbupdate])
