@@ -6,7 +6,24 @@ from dawdaw.utils import default, test
 
 cmd.run("update-locale LC_ALL=en_US.UTF-8 && export LC_ALL=en_US.UTF-8")  # ensure that we create the db with the correct encoding
 
-pkg.installed("dependancies", pkgs=["git-core", "python", "python-dev", "python-lxml", "python-imaging", "python-virtualenv", "postgresql", "postgresql-client", "python-psycopg2"])
+pkg.installed("dependancies",
+              pkgs=[
+                    "git-core",
+                    "python",
+                    "python-dev",
+                    "python-lxml",
+                    "python-imaging",
+                    "python-virtualenv",
+                    "postgresql",
+                    "postgresql-client",
+                    "python-psycopg2",
+                    "python-gst0.10",
+                    "gstreamer0.10-plugins-base",
+                    "gstreamer0.10-plugins-bad",
+                    "gstreamer0.10-plugins-good",
+                    "gstreamer0.10-plugins-ugly",
+                    "gstreamer0.10-ffmpeg",
+                   ])
 
 service.running("postgresql")
 
